@@ -1,30 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class AIController : MonoBehaviour {
 
-    public NavMeshAgent agent;
-    public GameObject target;
-    Animator anim;
+    // Agents destination
+    public GameObject goal;
+    // Get the prefab
+    NavMeshAgent agent;
 
-    void Start() {
-
-        agent = GetComponent<NavMeshAgent>();
-        anim = GetComponent<Animator>();
-        //agent.speed = Random.Range(3.0f, 8.0f);
-    }
-
-    void Update() {
-
-        agent.SetDestination(target.transform.position);
-        if (agent.remainingDistance < 2.0f) {
-
-            anim.SetBool("isMoving", false);
-        } else {
-
-            anim.SetBool("isMoving", true);
-        }
+    // Start is called before the first frame update
+    void Start() 
+    {
+        // Access the agents NavMesh
+        agent = this.GetComponent<NavMeshAgent>();
+        // Instruct the agent where it has to go
+        agent.SetDestination(goal.transform.position);
     }
 }
